@@ -110,7 +110,7 @@ public class MMGUI {
          *The Scene it self can only have one root Pane. So if we want 2 panes in the Scene we will need 3.
          */
         StackPane rootPane = new StackPane();
-        Scene gameScene = new Scene(rootPane, 1000, 650);
+        Scene gameScene = new Scene(rootPane, 1000, 750);
 
         /**
          * AnchorPane is the first "sub-pane" of the root pane.
@@ -121,21 +121,21 @@ public class MMGUI {
         AnchorPane anchorPane = new AnchorPane();
 
         HBox colorOptions = new HBox();
-        colorOptions.setSpacing(20);
+        colorOptions.setSpacing(17);
         for (int i = 0; i < 6; i++) {
-            Circle circle = new Circle(20);
+            Circle circle = new Circle(23);
             circle.setFill(colors[i]);
             colorOptions.getChildren().add(circle);
         }
-        setTopAnchor(colorOptions, 570.0);
+        setTopAnchor(colorOptions, 650.0);
         setLeftAnchor(colorOptions, 270.0);
 
         Button submitButton = new Button();
         submitButton.setText("Submit");
         submitButton.setPrefWidth(100);
         submitButton.setPrefHeight(50);
-        setTopAnchor(submitButton, 565.0);
-        setLeftAnchor(submitButton, 640.0);
+        setTopAnchor(submitButton, 650.0);
+        setLeftAnchor(submitButton, 660.0);
 
         anchorPane.getChildren().addAll(colorOptions, submitButton);
 
@@ -144,16 +144,16 @@ public class MMGUI {
          */
         GridPane gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
-        
+        gridPane.setPadding(new Insets(60,300,140,280));
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints columnConst = new ColumnConstraints();
-            columnConst.setPrefWidth(40);
+            columnConst.setPrefWidth(85);
             gridPane.getColumnConstraints().add(columnConst);
         }
 
         for (int i = 0; i < numRows; i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setPrefHeight(40);
+            rowConst.setPrefHeight(120);
             gridPane.getRowConstraints().add(rowConst);
         }
 
