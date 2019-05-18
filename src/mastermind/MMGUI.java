@@ -1,31 +1,25 @@
 package mastermind;
 
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.scene.text.Font;
 import javafx.geometry.Insets;
-
-import java.awt.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import static javafx.scene.layout.AnchorPane.setLeftAnchor;
 import static javafx.scene.layout.AnchorPane.setTopAnchor;
 
 public class MMGUI {
 
-    Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE, Color.ORANGE};
+    //Color[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE, Color.ORANGE};
     final int numCols = 4;
     final int numRows = 10;
+    final int feedbackCols = 2;
+    final int feedbackRows = 20;
 
     public void start() {
         // set title for the stage
@@ -45,7 +39,7 @@ public class MMGUI {
         setLeftAnchor(rules, 85.0);
 
         rules.setText(
-                " Welcome to Mastermind.\n" + "\n" +
+                "Welcome to Mastermind.\n" + "\n" +
                         "The object of Mastermind is to guess a secret code consisting\n" +
                         "of a series of 4 colored pegs.\n\n" +
                         "Each peg will be of one of 6 colors: \n\n" +
@@ -66,7 +60,6 @@ public class MMGUI {
                         "NOTE: The order of the feedback pegs does not correspond to either the pegs in the code or the pegs in your guess.\n\n " +
                         "Please click OK if you are ready!"
         );
-        rules.setWrapText(true);
 
         //Add rules to the pane
         pane.getChildren().add(rules);
@@ -97,6 +90,7 @@ public class MMGUI {
 
     }
 
+
     /*
         Create the board
      */
@@ -107,7 +101,7 @@ public class MMGUI {
         gameStage.setTitle("Mastermind");
 
         /**
-         *The Scene it self can only have one root Pane. So if we want 2 panes in the Scene we will need 3.
+         *The Scene itself can only have one root Pane. So if we want 2 panes in the Scene we will need 3 panes
          */
         StackPane rootPane = new StackPane();
         Scene gameScene = new Scene(rootPane, 1000, 750);
@@ -121,21 +115,77 @@ public class MMGUI {
         AnchorPane anchorPane = new AnchorPane();
 
         HBox colorOptions = new HBox();
-        colorOptions.setSpacing(17);
-        for (int i = 0; i < 6; i++) {
-            Circle circle = new Circle(23);
-            circle.setFill(colors[i]);
-            colorOptions.getChildren().add(circle);
-        }
+        colorOptions.setSpacing(15);
+        
+        Button red = new Button();
+        Button yellow = new Button();
+        Button green = new Button();
+        Button blue = new Button();
+        Button purple = new Button();
+        Button orange = new Button();
+
+        red.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Red"
+        );
+        yellow.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Gold"
+        );
+        green.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Green"
+        );
+        blue.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Blue"
+        );
+        purple.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Purple"
+        );
+        orange.setStyle(
+                "-fx-background-radius: 40em; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-max-width: 50px; " +
+                        "-fx-max-height: 50px;" +
+                        "-fx-background-color: Orange"
+        );
+
+        colorOptions.getChildren().addAll(red, yellow, green, blue, purple, orange);
+
+
+
         setTopAnchor(colorOptions, 650.0);
-        setLeftAnchor(colorOptions, 270.0);
+        setLeftAnchor(colorOptions, 260.0);
 
         Button submitButton = new Button();
         submitButton.setText("Submit");
-        submitButton.setPrefWidth(100);
+        submitButton.setPrefWidth(90);
         submitButton.setPrefHeight(50);
         setTopAnchor(submitButton, 650.0);
-        setLeftAnchor(submitButton, 660.0);
+        setLeftAnchor(submitButton, 650.0);
 
         anchorPane.getChildren().addAll(colorOptions, submitButton);
 
@@ -144,7 +194,7 @@ public class MMGUI {
          */
         GridPane gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
-        gridPane.setPadding(new Insets(60,300,140,280));
+        gridPane.setPadding(new Insets(60, 300, 150, 280));
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints columnConst = new ColumnConstraints();
             columnConst.setPrefWidth(85);
@@ -157,8 +207,28 @@ public class MMGUI {
             gridPane.getRowConstraints().add(rowConst);
         }
 
+        /**
+         * This pane for feedback is created separetely beacause the size of the cells will be different from the size of
+         * @param gridpane.
+         */
+
+        GridPane feedbackPane = new GridPane();
+        feedbackPane.setGridLinesVisible(true);
+        feedbackPane.setPadding(new Insets(60, 270, 150, 650));
+        for (int i = 0; i < feedbackCols; i++) {
+            ColumnConstraints feedbackColumnConst = new ColumnConstraints();
+            feedbackColumnConst.setPrefWidth(45);
+            feedbackPane.getColumnConstraints().add(feedbackColumnConst);
+        }
+
+        for (int i = 0; i < feedbackRows; i++) {
+            RowConstraints feedbackRowConst = new RowConstraints();
+            feedbackRowConst.setPrefHeight(60);
+            feedbackPane.getRowConstraints().add(feedbackRowConst);
+        }
+
         //Add the panes to the root pane and set the scene for the panes
-        rootPane.getChildren().addAll(anchorPane, gridPane);
+        rootPane.getChildren().addAll(anchorPane, gridPane, feedbackPane);
         gameStage.setScene(gameScene);
         gameStage.show();
 
