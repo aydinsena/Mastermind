@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
 import static javafx.scene.layout.AnchorPane.setLeftAnchor;
 import static javafx.scene.layout.AnchorPane.setTopAnchor;
@@ -82,7 +83,7 @@ public class MMGUI {
             }
         });
 
-        pane.getChildren().addAll(button);
+        pane.getChildren().add(button);
 
         // set the scene
         stage.setScene(scene);
@@ -114,17 +115,14 @@ public class MMGUI {
          */
         AnchorPane anchorPane = new AnchorPane();
 
-        HBox colorOptions = new HBox();
-        colorOptions.setSpacing(15);
-        
-        Button red = new Button();
-        Button yellow = new Button();
-        Button green = new Button();
-        Button blue = new Button();
-        Button purple = new Button();
-        Button orange = new Button();
+        Button redButton = new Button();
+        Button yellowButton = new Button();
+        Button greenButton = new Button();
+        Button blueButton = new Button();
+        Button purpleButton = new Button();
+        Button orangeButton = new Button();
 
-        red.setStyle(
+        redButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -132,7 +130,7 @@ public class MMGUI {
                         "-fx-max-height: 50px;" +
                         "-fx-background-color: Red"
         );
-        yellow.setStyle(
+        yellowButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -140,7 +138,7 @@ public class MMGUI {
                         "-fx-max-height: 50px;" +
                         "-fx-background-color: Gold"
         );
-        green.setStyle(
+        greenButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -148,7 +146,7 @@ public class MMGUI {
                         "-fx-max-height: 50px;" +
                         "-fx-background-color: Green"
         );
-        blue.setStyle(
+        blueButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -156,7 +154,7 @@ public class MMGUI {
                         "-fx-max-height: 50px;" +
                         "-fx-background-color: Blue"
         );
-        purple.setStyle(
+        purpleButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -164,7 +162,7 @@ public class MMGUI {
                         "-fx-max-height: 50px;" +
                         "-fx-background-color: Purple"
         );
-        orange.setStyle(
+        orangeButton.setStyle(
                 "-fx-background-radius: 40em; " +
                         "-fx-min-width: 50px; " +
                         "-fx-min-height: 50px; " +
@@ -173,12 +171,14 @@ public class MMGUI {
                         "-fx-background-color: Orange"
         );
 
-        colorOptions.getChildren().addAll(red, yellow, green, blue, purple, orange);
 
-
-
+        HBox colorOptions = new HBox();
+        colorOptions.setSpacing(15);
         setTopAnchor(colorOptions, 650.0);
         setLeftAnchor(colorOptions, 260.0);
+
+        colorOptions.getChildren().addAll(redButton, yellowButton, greenButton, blueButton, purpleButton, orangeButton);
+
 
         Button submitButton = new Button();
         submitButton.setText("Submit");
@@ -188,6 +188,7 @@ public class MMGUI {
         setLeftAnchor(submitButton, 650.0);
 
         anchorPane.getChildren().addAll(colorOptions, submitButton);
+
 
         /**
          * GridPane
@@ -228,9 +229,10 @@ public class MMGUI {
         }
 
         //Add the panes to the root pane and set the scene for the panes
-        rootPane.getChildren().addAll(anchorPane, gridPane, feedbackPane);
+        rootPane.getChildren().addAll(gridPane, feedbackPane, anchorPane);
         gameStage.setScene(gameScene);
         gameStage.show();
+
 
     }
 

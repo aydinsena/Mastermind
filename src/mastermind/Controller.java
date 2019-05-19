@@ -7,15 +7,15 @@ public class Controller {
 
     public static class Main extends Application {
 
-
         @Override
-
-        public void start(Stage stage) {
-
-            new MMGUI().start();
-
-
+        public void start(Stage stage) throws Exception {
+            (new MMGUI()).GameBoard();
         }
 
+        public static void main(String[] args) {
+            launch(args);
+        }
     }
 }
+
+
